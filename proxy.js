@@ -50,7 +50,7 @@ async function handleRequest(request) {
     if (req_url.pathname.startsWith('/ajax/')) {//ajax
         let url = req_url.pathname.slice(6).replace(/^(https?):\/+/, '$1://');
         if (!url) return new Response("Only For Ajax");
-        let res = await fetch(url, { headers: request.headers, body: request.body });
+        let res = await fetch(url, { method: request.method, headers: request.headers, body: request.body });
         let h = new Headers(res.headers);
         h.set('access-control-allow-origin', '*');
         h.set('access-control-expose-headers', '*');
